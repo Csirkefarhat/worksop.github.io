@@ -8,8 +8,9 @@ This is a simple web application that allows users to draw event cards from a de
 - **User Interface**: A simple interface with the ability to view the drawn card.
 
 ## Project Structure
-- **index.html**: Contains the main menu with links to the "Card Drawing" page and a "Manual" link.
+- **index.html**: Contains the main menu with links to the "Card Drawing" page and a "Manual" (yet to be added) link.
 - **draw.html**: Contains the event card drawing interface with a button to draw a card and display the card title.
 - **style.css**: Styles for the pages, including layout and button appearance.
 - **scripts.js**: JavaScript for handling card drawing functionality, including fetching card data from a JSON file and drawing random cards.
-- **cards.json**: JSON file containing the titles of the event cards.
+- **cards_english.json**: JSON file containing the titles of the event cards in English.
+- **cards_spanish.json**: JSON file containing the titles of the event cards in Spanish.
