@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Event Card</h1>
+ <div class="container">
+        <h1>Event cards</h1>
         <button id="drawButton" disabled>Draw</button>
-        <p id="drawnCardLabel"></p>
+        <div id="drawnCardContainer">
+            <div id="drawnCardEnglish" class="card">
+                <p class="card-label">English:</p>
+                <p id="drawnCardLabelEnglish" class="card-content">Loading English card...</p>
+            </div>
+            <div id="drawnCardSpanish" class="card">
+                <p class="card-label">Spanish:</p>
+                <p id="drawnCardLabelSpanish" class="card-content">Loading Spanish card...</p>
+            </div>
+        </div>
     </div>
     <script src="scripts.js"></script>
 </body>
