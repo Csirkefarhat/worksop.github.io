@@ -1,55 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
     const drawButton = document.getElementById('drawButton');
-    const drawnCardLabel = document.getElementById('drawnCardLabel');
-    let deck = [];
+    const drawnCardLabelEnglish = document.getElementById('drawnCardLabelEnglish');
+    const drawnCardLabelSpanish = document.getElementById('drawnCardLabelSpanish');
+    let deckEnglish = [];
+    let deckSpanish = [];
 
-    const initializeDeck = (titles) => {
-        deck = [...titles];
+    const initializeDecks = (dataEnglish, dataSpanish) => {
+        deckEnglish = [...dataEnglish];
+        deckSpanish = [...dataSpanish];
         drawButton.disabled = false;
     };
 
     const drawCard = () => {
-        if (deck.length === 0) {
-            fetch('cards.json')
-                .then(response => response.json())
-                .then(data => {
-                    initializeDeck(data);
-                })
-                .catch(error => {
-                    console.error('Error reinitializing card titles:', error);
-                    drawnCardLabel.textContent = 'Failed to reinitialize card titles.';
-                });
+
+        if (deckEnglish.length === 0) {
+            fetchCardData();
             return;
         }
 
-        const randomIndex = Math.floor(Math.random() * deck.length);
-        const drawnCard = deck.splice(randomIndex, 1)[0];
+        const randomIndex = Math.floor(Math.random() * deckEnglish.length);
+        const drawnCard = deckEnglish.splice(randomIndex, 1)[0];
+        const drawnCardEsp = deckSpanish.splice(randomIndex, 1)[0];
         const [prefix, boldPart] = drawnCard.split(':');
-        drawnCardLabel.innerHTML = `<strong style="font-size: 1.5rem;">${prefix}</strong>: <style="font-size: 1.5rem;">${boldPart}`;
+        const [prefixesp, boldPartesp] = drawnCardEsp.split(':');
 
-        if (deck.length === 0) {
-            drawnCardLabel.textContent += " The deck is empty! Reinitializing...";
-            fetch('cards.json')
-                .then(response => response.json())
-                .then(data => {
-                    initializeDeck(data);
-                })
-                .catch(error => {
-                    console.error('Error reinitializing card titles:', error);
-                    drawnCardLabel.textContent = 'Failed to reinitialize card titles.';
-                });
-        }
+        drawnCardLabelEnglish.innerHTML = `<strong>${prefix}</strong>: ${boldPart}`;
+        drawnCardLabelSpanish.innerHTML = `<strong>${prefixesp}</strong>: ${boldPartesp}`; // Function to translate to Spanish
     };
 
-    fetch('cards.json')
-        .then(response => response.json())
-        .then(data => {
-            initializeDeck(data);
-        })
-        .catch(error => {
-            console.error('Error loading card titles:', error);
-            drawnCardLabel.textContent = 'Failed to load card titles.';
-        });
+    const fetchCardData = () => {
+        fetch('cards_english.json')
+            .then(response => response.json())
+            .then(dataEnglish => {
+                return fetch('cards_spanish.json')
+                    .then(response => response.json())
+                    .then(dataSpanish => {
+                        initializeDecks(dataEnglish, dataSpanish);
+                    });
+            })
+            .catch(error => {
+                console.error('Error fetching card titles:', error);
+                drawnCardLabelEnglish.innerHTML = 'Failed to load English card titles.';
+                drawnCardLabelSpanish.innerHTML = 'Failed to load Spanish card titles.';
+            });
+    };
+
+    fetchCardData();
 
     drawButton.addEventListener('click', drawCard);
 });
