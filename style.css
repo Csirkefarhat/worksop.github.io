@@ -5,25 +5,39 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #212121;
+    background-image: url(background.jpg);
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-blend-mode:lightens ;
 }
 
 .container {
     text-align: center;
+    font-size: 1.1rem;
     background-color: #ffffff;
+    opacity: 0.9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     font-size: 1.2rem;
     cursor: pointer;
     margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #8591f5, #426488);
+    color: white;
+    font-weight: bold;
 }
 
-p {
-    font-size: 18px;
-    margin-top: 20px;
+a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #1E90FF;
+    font-weight: bold;
 }
